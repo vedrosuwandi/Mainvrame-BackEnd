@@ -22,6 +22,7 @@ mongoose.connect( process.env.DATABASE_CONNECTION ,  {
 });
 
 const database = mongoose.connection;
+const port = process.env.PORT || 3000;
 
 database.on("error" ,(err)=>{
     console.log(err);  
@@ -36,7 +37,7 @@ app.use(bodyParser.json());
 
 //Listening
 app.listen(process.env.PORT , ()=>{
-    console.log(`Listening at port ${process.env.PORT}`);
+    console.log(`Listening at port ${port}`);
 })
 
 //Defining Route
