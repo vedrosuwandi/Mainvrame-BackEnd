@@ -8,21 +8,23 @@ const RefreshAuthenticate = (req, res, next) =>{
 
         req.refreshToken = refreshToken;
         req.user = decode;
-        
+
         next();
         
     }catch(err){
         if(err.name == "TokenExpiredError"){
             res.status(401).json({
                 err,
+                online : false,
                 message : "Refresh Token Expired"
             })
             return
+        }else{
+            res.status(401).json({
+                err: err.message,
+                message : "Authentication Failed!",
+            })
         }
-        res.json({
-            err: err.message,
-            message : "Authentication Failed!",
-        })
     }
 }
 
